@@ -1,0 +1,162 @@
+a {
+    color: red;
+}
+
+form {
+    padding: 20px;
+}
+
+label {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 13px;
+}
+
+input {
+    padding: 5px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin-bottom: 10px;
+}
+
+button {
+    width: 200px;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    margin: 20px;
+    border-radius: 8px;
+}
+
+input[type="image"] {
+    width: 20px;
+    height: auto;
+}
+
+input[type="tel"] {
+    width: 200px;
+}
+
+select{
+    margin-bottom: 10px;
+    margin-right: 20px;
+}
+
+
+.inputtxt_minsize{
+    min-width: 300px;
+}
+.formin_container {
+    display: flex;
+    flex-flow: column wrap;
+    padding: 8px;
+}
+
+.formin_title_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.p_grande {
+    font-size: large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
+
+.p_peque {
+    font-size: small;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.centrado {
+    text-align: center;
+}
+
+#formout_container {
+    margin: 40px 20px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+#formout_title_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: calc(100% - 90px);
+    left: 40px;
+    position: absolute;
+    top: 5px;
+    background-color: white;
+    padding: 0 5px;
+}
+
+#logo_lotoplus {
+    width: 40px;
+    height: auto;
+}
+
+#logo_lotoplus_title {
+    right: 40px;
+}
+
+
+#datos_form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media(max-width:600px){
+    #datos_form {
+        justify-content: none;
+}
+}
+
+#img_perfil {
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+#btn_submit {
+    background-color: cadetblue;
+}
+
+#btn_cancelar {
+    background-color: red;
+}
+
+#lbl_marketing,
+#lbl_condiciones {
+    font-size: 9px;
+}
+
+#contra_container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+#contra {
+    min-width: 250px;
+    width: 80%;
+    max-width: 350px;
+}
+
+#botones_container, #inicio_sesion {
+    display: flex;
+    justify-content: center;
+}
+
+#pie {
+    margin-top: 1rem;
+    background-color: beige;
+    font-family: 'Courier New';
+    font-size: 0.8rem;
+}
+
+/* #cab {
+    background-color: beige;
+    color: blue;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+} */

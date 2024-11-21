@@ -1,0 +1,10 @@
+.datos{
+    display: flex;
+    flex-direction: row;
+}
+
+#usuario_foto{
+    max-height: 250px;
+    width: auto;
+    margin: 10px;
+}
