@@ -1,5 +1,4 @@
 <?php
-$titulo = "Formulario LotoPlus";
 require("includes/cabecera.php");
 
 // Si se abre la página habiendo pulsado el botón CREAR CUENTA se procederá a mostrar 

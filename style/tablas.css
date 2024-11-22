@@ -1,0 +1,26 @@
+table {
+    font-family: Arial;
+    text-align: center;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    font-size: 1.2em;
+    border: 1px solid #98b;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    background-color: #aaa;
+    color: #fff;
+}
+
+td {
+    font-size: 1em;
+    border: 1px solid #98b;
+    padding: 4px 7px 2px 7px;
+}
+
+.alt {
+    color: #000;
+    background-color: #eee;
+}

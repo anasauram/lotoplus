@@ -1,8 +1,5 @@
 <?php
-$titulo = "Formulario LotoPlus";
 require("includes/cabecera.php");
-// require("includes/config.php");
-// require("includes/funciones.php");
 $pdo = conectar();
 ?>
 <h1>MENÚ DE INICIO</h1>
