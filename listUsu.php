@@ -19,6 +19,7 @@ $numIni = ($numPag - 1) * $REGISTROS_PAG;
         <th>APELLIDOS</th>
         <th colspan="3">ACCI&Oacute;N</th>
     </tr>
+
     <?php
     //nos conectamos a mysql
     $pdo = conectar();
@@ -38,12 +39,11 @@ $numIni = ($numPag - 1) * $REGISTROS_PAG;
         echo "<td>" . $fila['nomusu'] . "</td>\n";
         echo "<td>" . $fila['nombre'] . "</td>\n";
         echo "<td>" . $fila['apellidos'] . "</td>\n";
-        echo "<td><a href='verUsu.php?id=" . $fila['idusuario'] . "'>ver</a></td>\n";
         echo "<td><a href='editarUsu.php?id=" . $fila['idusuario'] . "'>editar</a></td>\n";
         echo "<td><a href='eliminarUsu.php?id=" . $fila['idusuario'] . "'>eliminar</a></td></tr>\n";
     }
     if ($conta == 0) {
-        echo "<td colspan='7' align='center' >No se obtuvieron resultados</td>";
+        echo "<td colspan='6' align='center' >No se obtuvieron resultados</td>";
     }
     // +++++++++++++++++++ Paginación 
     // Calculamos el número total de páginas
@@ -52,10 +52,10 @@ $numIni = ($numPag - 1) * $REGISTROS_PAG;
     $fila = $res->fetch();
     $totalFilas = $fila['contaFilas'];  // 34
     $totalPag = ceil($totalFilas / $REGISTROS_PAG);   // 34/20 = 2
-    echo "<tr><td class='centrado' colspan='7'>Mostrados $conta usuarios - Total $totalFilas usuarios</td></tr>";
+    echo "<tr><td class='centrado' colspan='6'>Mostrados $conta usuarios - Total $totalFilas usuarios</td></tr>";
     // Si hay más páginas, mostramos los enlaces
     if ($totalPag > 1) {
-        echo "<tr><td  class='centrado' colspan='7'>";
+        echo "<tr><td  class='centrado' colspan='6'>";
         if ($numPag > 1) {
             //Página anterior
             echo "<a href='" . $_SERVER['PHP_SELF'] . "?numPagina=" . ($numPag - 1) . "'>Anterior</a> ";
@@ -68,8 +68,7 @@ $numIni = ($numPag - 1) * $REGISTROS_PAG;
     }
     ?>
 </table>
-<br>
-<p><a href='nuevo_pdo.php'>Nuevo registro</a></p>
+<p><a href='altaUsu.php'>Nuevo registro</a></p>
 
 <?php
 require("includes/pie.php")

@@ -110,7 +110,7 @@ if (isset($_POST['submit'])) {
                 }
             </script>
 
-            <form action="registro.php" method="POST" enctype="multipart/form-data">
+            <form action="altaUsu.php" method="POST" enctype="multipart/form-data">
                 <div id="datos_form">
                     <div class="formin_container">
                         <input type="text" maxlength="45" placeholder="Nombre" class="inputtxt_minsize" name="nombre" required>
