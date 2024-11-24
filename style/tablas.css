@@ -20,6 +20,11 @@ td {
     padding: 4px 7px 2px 7px;
 }
 
+table tr:nth-child(2n+1) {
+    color: #000;
+    background-color: #eee;
+}
+
 .alt {
     color: #000;
     background-color: #eee;

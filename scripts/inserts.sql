@@ -1,3 +1,4 @@
+use lotoplusdb;
 -- Relación de nombres con contraseñas originales antes del hash de los 10 primeros usuarios insertados:
 -- ('Juan', 'Pérez López', 'juanp') -> Contraseña original: 'clave123'
 -- ('María', 'González Torres', 'mariagt') -> Contraseña original: 'mypass123'
