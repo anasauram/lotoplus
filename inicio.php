@@ -6,7 +6,7 @@ $pdo = conectar();
 <h2>Usuarios:</h2>
 <ul>
     <li><a href="listUsu.php">Listado usuarios</a></li>
-    <li><a href="altaUsu.php">Alta usuarios</a></li>
+    <li><a href="altaEditUsu.php?modo=alta">Alta usuarios</a></li>
 </ul>
 <h2>Sorteos:</h2>
 <ul>

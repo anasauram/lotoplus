@@ -39,7 +39,7 @@ $numIni = ($numPag - 1) * $REGISTROS_PAG;
         echo "<td>" . $fila['nomusu'] . "</td>\n";
         echo "<td>" . $fila['nombre'] . "</td>\n";
         echo "<td>" . $fila['apellidos'] . "</td>\n";
-        echo "<td><a href='editarUsu.php?id=" . $fila['idusuario'] . "'>editar</a></td>\n";
+        echo "<td><a href='altaEditUsu.php?modo=editar&id=" . $fila['idusuario'] . "'>editar</a></td>\n";
         echo "<td><a href='eliminarUsu.php?id=" . $fila['idusuario'] . "'>eliminar</a></td></tr>\n";
     }
     if ($conta == 0) {
@@ -68,7 +68,7 @@ $numIni = ($numPag - 1) * $REGISTROS_PAG;
     }
     ?>
 </table>
-<p><a href='altaUsu.php'>Nuevo registro</a></p>
+<p><a href='altaEditUsu.php?modo=alta'>Nuevo registro</a></p>
 
 <?php
 require("includes/pie.php")
