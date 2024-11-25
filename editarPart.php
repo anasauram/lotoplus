@@ -1,6 +1,7 @@
 <?php
 require("includes/cabecera.php");
 
+// Si no se encuentra ninguna id de participación vuelve automaticamente al listado
 if (!isset($_GET['id'])) {
     header("Location: listPart.php");
     exit;
@@ -8,43 +9,53 @@ if (!isset($_GET['id'])) {
 
 $id = $_GET['id'];
 
-// Nos conectamos a mysql
-$pdo = conectar();
+try {
+    // Nos conectamos a la base de datos
+    $pdo = conectar();
 
-// Recibimos la información de la participación
-$sql = "SELECT * FROM participaciones WHERE idpart = ?";
-$consulta = $pdo->prepare($sql);
-$consulta->execute([$id]);
-$participacion = $consulta->fetch();
-
-if (!$participacion) {
-    echo "Participación no encontrada <a href='listPart.php'>vuelve a la página anterior</a>";
-    exit;
-}
-
-// Introducimos la información el formulario de edición
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $numero = $_POST['numero'];
-    $importe = $_POST['importe'];
-
-    // Actualizar la participación
-    $sql = "UPDATE participaciones SET numero = ?, importe = ? WHERE idpart = ?";
+    // Obtenemos la participación
+    $sql = "SELECT * FROM participaciones WHERE idpart = ?";
     $consulta = $pdo->prepare($sql);
-    $consulta->execute([$numero, $importe, $id]);
+    $consulta->execute([$id]);
+    $participacion = $consulta->fetch();
 
-    echo "Participación actualizada <a href='listPart.php'>vuelve al listado</a>";
+    if (!$participacion) {
+        throw new Exception("Participación no encontrada.");
+    }
+
+    // Si se envía el formulario, actualizamos la participación
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $numero = $_POST['numero'];
+        $importe = $_POST['importe'];
+    
+        // Nos aseguramos de que los datos sean obligatoriamente numericos
+        if (!is_numeric($numero) || !is_numeric($importe)) {
+            echo "El número de participación y el importe deben ser números válidos.";
+            exit;
+        }
+    
+        // Actualizamos la participación
+        $sql = "UPDATE participaciones SET numero = ?, importe = ? WHERE idpart = ?";
+        $consulta = $pdo->prepare($sql);
+        $consulta->execute([$numero, $importe, $id]);
+    
+        echo "Participación actualizada <a href='listPart.php'>vuelve al listado</a>";
+        exit;
+    }
+} catch (Exception $e) {
+    echo "<p>Error: " . $e->getMessage() . "</p>";
+    echo "<p><a href='listPart.php'>Volver al listado</a></p>";
     exit;
 }
-
 ?>
 
 <h2>Editar participación</h2>
 <form method="POST">
     <label for="numero">Número de participación:</label>
-    <input type="text" id="numero" name="numero" value="<?= $participacion['numero'] ?>"><br><br>
+    <input type="text" id="numero" name="numero" value="<?= $participacion['numero'] ?? '' ?>"><br><br>
 
     <label for="importe">Importe:</label>
-    <input type="text" id="importe" name="importe" value="<?= $participacion['importe'] ?>"><br><br>
+    <input type="text" id="importe" name="importe" value="<?= $participacion['importe'] ?? '' ?>"><br><br>
 
     <button type="submit">Actualizar</button>
 </form>
