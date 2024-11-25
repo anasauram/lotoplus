@@ -116,7 +116,7 @@ if (isset($_POST['submit']) && $_GET['modo'] == "alta") {
 // **************** Edición usuario ****************
 if (isset($_POST['submit']) && $_GET['modo'] == "editar" && isset($_GET['id'])) {
     $pdo = conectar();
-    $sql = "UPDATE usuarios SET nombre = ?, apellidos = ?, nomusu = ?, clave = ?, email = ?, tel = ?, ganancias = ?, fechanac = ?, imgusu = ?, tipocu = ?, marketing = ? WHERE id = ?";
+    $sql = "UPDATE usuarios SET nombre = ?, apellidos = ?, nomusu = ?, clave = ?, email = ?, tel = ?, ganancias = ?, fechanac = ?, imgusu = ?, tipocu = ?, marketing = ? WHERE idusuario = ?";
     $sentencia = $pdo->prepare($sql);
     $parametros = array($nombre, $apellidos, $nombre_usuario, $contraHashed, $email, $tlf, $ganancias_iniciales, $fecha_nacimiento, $nombre_ruta_foto, $tipo_cuenta, $marketing, $_GET['id']);
     $sentencia->execute($parametros);
@@ -140,35 +140,25 @@ if (isset($_POST['submit']) && $_GET['modo'] == "editar" && isset($_GET['id'])) 
                 <img src="img/lotoplus.png" alt="Logo de LotoPlus" id="logo_lotoplus">
             </div>
         </div>
-        <script>
-            function togglePasswordVisibility(event) {
-                event.preventDefault(); // Evitar que se envíe el formulario al hacer clic en la imagen.
-
-                const passwordInput = document.getElementById('contra');
-                const isPasswordVisible = passwordInput.type === "text"; // Cambiar el tipo de input entre "password" y "text".
-                passwordInput.type = isPasswordVisible ? "password" : "text";
-
-                const img = event.target; // Cambiar la imagen del botón según el estado
-                img.src = isPasswordVisible ? "img/mostrarContra.png" : "img/ocultarContra.png"; // Cambia la ruta de la imagen de ocultar.
-            }
-        </script>
-
         <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" enctype="multipart/form-data">
             <div id="datos_form">
                 <div class="formin_container">
-                    <input type="text" maxlength="45" placeholder="Nombre" class="inputtxt_minsize" name="nombre" value="<?= ($_GET['modo'] == 'editar') ? $nombre : "" ?>" required>
+                    <input type="text" maxlength="45" placeholder="Nombre" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+" class="inputtxt_minsize" name="nombre" value="<?= ($_GET['modo'] == 'editar') ? $nombre : "" ?>" required>
                     <input type=" text" maxlength="65" placeholder="Apellidos" class="inputtxt_minsize" name="apellidos" value="<?= ($_GET['modo'] == 'editar') ? $apellidos : "" ?>" required>
-                    <input type="text" minlength="3" maxlength="30" placeholder="Nombre de usuario" name="nombre_usuario" class="inputtxt_minsize" value="<?= ($_GET['modo'] == 'editar') ? $nombre_usuario : "" ?>" required>
+                    <input type="text" minlength="3" maxlength="30" placeholder="Nombre de usuario" name="nombre_usuario" class="inputtxt_minsize" pattern="[a-zA-Z0-9]+" value="<?= ($_GET['modo'] == 'editar') ? $nombre_usuario : "" ?>" required>
                     <div id="contra_container">
-                        <input type="password" minlength="4" maxlength="20" placeholder="Contraseña" id="contra" name="contra" required>
+                        <input type="password" minlength="4" maxlength="20" placeholder="Contraseña" id="contra" name="contra"
+                            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+" required>
                         <input type="image" src="img/mostrarContra.png" alt="Mostrar/Ocultar contraseña" id="img-contra" onclick="togglePasswordVisibility(event)">
                     </div>
-                    <input type="email" placeholder="Correo electrónico" class="inputtxt_minsize" name="email" value="<?= ($_GET['modo'] == 'editar') ? $email : "" ?>" required>
+                    <input type="email" placeholder="Correo electrónico" class="inputtxt_minsize" name="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                        value="<?= ($_GET['modo'] == 'editar') ? $email : "" ?>" required>
                 </div>
                 <div class="formin_container">
                     <div>
                         <label for="fecha_nacimiento">Fecha de nacimiento:</label>
-                        <input type="text" id="fecha_nacimiento" placeholder="dd/mm/aaaa" name="fecha_nacimiento" value="<?= ($_GET['modo'] == 'editar') ? DateTime::createFromFormat('Y-m-d', $fecha_nacimiento)->format('d/m/Y') : "" ?>" required>
+                        <input type="text" id="fecha_nacimiento" placeholder="dd/mm/aaaa" name="fecha_nacimiento" pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$"
+                            value="<?= ($_GET['modo'] == 'editar') ? DateTime::createFromFormat('Y-m-d', $fecha_nacimiento)->format('d/m/Y') : "" ?>" required>
                     </div>
                     <div>
                         <label for="tipo_cuenta">Tipo de cuenta</label>
@@ -176,9 +166,9 @@ if (isset($_POST['submit']) && $_GET['modo'] == "editar" && isset($_GET['id'])) 
                             <option value="gratuita" <?= ($_GET['modo'] == 'editar' && $tipo_cuenta == 'gratuita') ? 'selected' : '' ?>>Gratuita</option>
                             <option value="suscripcion" <?= ($_GET['modo'] == 'alta') ? 'selected' : '' ?><?= ($_GET['modo'] == 'editar' && $tipo_cuenta == 'suscripcion') ? 'selected' : '' ?>>Suscripci&oacuten</option>
                         </select>
-                        <input type="number" placeholder="Ganancias iniciales" name="ganancias_iniciales" value="<?= ($_GET['modo'] == 'editar') ? $ganancias_iniciales : '' ?>">
+                        <input type="number" placeholder="Ganancias iniciales" step="0.01" name="ganancias_iniciales" value="<?= ($_GET['modo'] == 'editar') ? $ganancias_iniciales : '' ?>">
                     </div>
-                    <input type="tel" placeholder="Móvil" name="tlf" value="<?= ($_GET['modo'] == 'editar') ? $tlf : '' ?>" required>
+                    <input type="tel" minlength="9" maxlength="9" placeholder="Móvil" name="tlf" value="<?= ($_GET['modo'] == 'editar') ? $tlf : '' ?>" $pattern='/^(9[1-9][0-9]{7}|6[0-9]{8}|7[0-9]{8})$/' ; required>
                     <div>
                         <label for="img_perfil">Imagen de perfil</label>
                         <input type="file" id="img_perfil" accept=".jpg, .gif, .png" name="foto">
@@ -217,6 +207,38 @@ if (isset($_POST['submit']) && $_GET['modo'] == "editar" && isset($_GET['id'])) 
             <?php } ?>
         </form>
     </div>
+
+    <!-- *********************** SCRIPTS *********************** -->
+    <!-- Control de tamaño máximo de archivo subido -->
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(e) {
+            var file = document.getElementById('img_perfil').files[0];
+
+            // Tamaño máximo permitido (en bytes).
+            var maxSize = 4096 * 1024; // 4096KB
+
+            if (file.size > maxSize) {
+                e.preventDefault(); // Detener el envío del formulario
+                <?php
+                $errores[] = "El archivo subido supera el tamaño requerido";
+                ?>
+            }
+        });
+    </script>
+
+    <!-- Cambio de visibilidad de contraseña -->
+    <script>
+        function togglePasswordVisibility(event) {
+            event.preventDefault(); // Evitar que se envíe el formulario al hacer clic en la imagen.
+
+            const passwordInput = document.getElementById('contra');
+            const isPasswordVisible = passwordInput.type === "text"; // Cambiar el tipo de input entre "password" y "text".
+            passwordInput.type = isPasswordVisible ? "password" : "text";
+
+            const img = event.target; // Cambiar la imagen del botón según el estado
+            img.src = isPasswordVisible ? "img/mostrarContra.png" : "img/ocultarContra.png"; // Cambia la ruta de la imagen de ocultar.
+        }
+    </script>
     <?php
     require("includes/pie.php");
     ?>
