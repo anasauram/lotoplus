@@ -10,20 +10,8 @@ $REGISTROS_PAG = 10;
 // Se calcula la fila inicial para el LIMIT
 $numIni = ($numPag - 1) * $REGISTROS_PAG;
 
-?>
-<table>
-    <tr>
-        <th>ID PARTICIPACIÓN</th>
-        <th>ID USUARIO</th>
-        <th>ID SORTEO</th>
-        <th>NÚMERO</th>
-        <th>IMPORTE</th>
-        <th>CAPTURA</th>
-        <th colspan="3">ACCI&Oacute;N</th>
-    </tr>
-
-    <?php
-    // Nos conectamos a mysql
+try {
+    // Nos conectamos a la base de datos
     $pdo = conectar();
 
     // Consulta para obtener las participaciones
@@ -35,7 +23,17 @@ $numIni = ($numPag - 1) * $REGISTROS_PAG;
     $res = $pdo->query($sql);
     $conta = 0;
 
-    // Mostramps las filas de la tabla
+    // Mostramos las filas de la tabla
+    echo "<table>";
+    echo "<tr>
+        <th>ID PARTICIPACIÓN</th>
+        <th>ID USUARIO</th>
+        <th>ID SORTEO</th>
+        <th>NÚMERO</th>
+        <th>IMPORTE</th>
+        <th>ACCIÓN</th>
+    </tr>";
+
     while ($fila = $res->fetch()) {
         $conta++;
         echo $conta % 2 === 0 ? "<tr class='alt'>" : "<tr>";
@@ -65,17 +63,28 @@ $numIni = ($numPag - 1) * $REGISTROS_PAG;
 
     if ($totalPag > 1) {
         echo "<tr><td colspan='8' class='centrado'>";
+
         if ($numPag > 1) {
             echo "<a href='" . $_SERVER['PHP_SELF'] . "?numPagina=" . ($numPag - 1) . "'>Anterior</a> ";
         }
         if ($totalPag > $numPag) {
             echo "<a href='" . $_SERVER['PHP_SELF'] . "?numPagina=" . ($numPag + 1) . "'>Siguiente</a>";
         }
+
         echo "</td></tr>";
     }
-    ?>
-</table>
-<p><a href='editPart.php?modo=alta'>Nueva participación</a></p>
+
+} catch (Exception $e) {
+    // Capturamos el error y mostramos un mensaje
+    echo "<p>Error: " . $e->getMessage() . "</p>";
+}
+
+echo "</table>";
+?>
+
+<p><a href='nuevaPart.php'>Nueva participación</a></p>
+
+<p><a href="inicio.php"><button>Volver a Inicio</button></a></p>
 
 <?php
 require("includes/pie.php");
