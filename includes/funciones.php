@@ -14,13 +14,25 @@ function conectar()
 }
 
 /** Función existeUsu: comprueba que el usuario pasado por parámetro existe en la base de datos. */
-function existeUsu($nomUsu): bool
+function existeUsu($nomUsu, $id_usuario = null): bool
 {
     $pdo = conectar();
-    $sql = "SELECT 1 FROM usuarios WHERE nomusu = ?";
+    $sql = "SELECT * FROM usuarios WHERE nomusu = ? AND (idusuario != ? OR ? IS NULL)";
     $sentencia = $pdo->prepare($sql);
-    $sentencia->bindValue(0, $nomUsu, PDO::PARAM_STR);
-    $sentencia->execute();
-    // fetchColumn devuelve el resultado de una sola columna de una fila, en este caso o 1 o false.
-    return $sentencia->fetchColumn() !== false;
+    $sentencia = $pdo->prepare($sql);
+    $sentencia->execute([$nomUsu, $id_usuario, $id_usuario]);
+    return $sentencia->rowCount() > 0;
+}
+
+/**
+ * Comprueba si una persona es mayor de edad según su fecha de nacimiento.
+ * @param string $fechaNacimiento - Fecha de nacimiento en formato "YYYY-MM-DD".
+ * @return bool - Retorna true si es mayor de edad, false si no lo es.
+ */
+function esMayorDeEdad($fechaNacimiento)
+{
+    $hoy = new DateTime();
+    $nacimiento = DateTime::createFromFormat('d/m/Y', $fechaNacimiento);
+    $edad = $hoy->diff($nacimiento)->y;     // Diferencia de años.
+    return $edad >= 18;
 }
