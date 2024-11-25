@@ -12,6 +12,7 @@ function conectar()
     }
     return $pdo;
 }
+
 /** Función existeUsu: comprueba que el usuario pasado por parámetro existe en la base de datos. */
 function existeUsu($nomUsu): bool
 {
