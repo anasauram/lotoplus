@@ -6,6 +6,7 @@ $idSorteoError = "";
 $errorGeneral = "";
 
 try {
+    // Nos conectamos a la base de datos
     $pdo = conectar();
 
     // Si se envía el formulario
@@ -22,7 +23,7 @@ try {
             $idUsuarioError = "El usuario no existe.";
         }
 
-        // Verificamps si el sorteo existe
+        // Verificamos si el sorteo existe
         $sql = "SELECT COUNT(*) FROM sorteos WHERE idsorteo = ?";
         $consulta = $pdo->prepare($sql);
         $consulta->execute([$idSorteo]);
@@ -30,7 +31,7 @@ try {
             $idSorteoError = "El sorteo no existe.";
         }
 
-        // Si no hay errores, crear la participación
+        // Si no hay errores, se crea la participación
         if (!$idUsuarioError && !$idSorteoError) {
             // Se genera un número de participación único
             do {
@@ -40,7 +41,7 @@ try {
                 $consulta->execute([$numeroParticipacion]);
             } while ($consulta->fetchColumn() > 0);
 
-            // Insertar nueva participación
+            // Insertamos la nueva participación
             $sql = "INSERT INTO participaciones (idprop, idsorteo, numero, importe) VALUES (?, ?, ?, ?)";
             $consulta = $pdo->prepare($sql);
             $consulta->execute([$idUsuario, $idSorteo, $numeroParticipacion, $importe]);
@@ -64,17 +65,17 @@ try {
     <?php endif; ?>
 
     <label for="idUsuario">ID Usuario:</label>
-    <input type="number" id="idUsuario" name="idUsuario" value="<?= htmlspecialchars($_POST['idUsuario'] ?? '') ?>" required>
+    <input type="number" id="idUsuario" name="idUsuario" value="<?= ($_POST['idUsuario'] ?? '') ?>" required>
     <span style="color: red;"><?= $idUsuarioError ?></span>
     <br><br>
 
     <label for="idSorteo">ID Sorteo:</label>
-    <input type="number" id="idSorteo" name="idSorteo" value="<?= htmlspecialchars($_POST['idSorteo'] ?? '') ?>" required>
+    <input type="number" id="idSorteo" name="idSorteo" value="<?= ($_POST['idSorteo'] ?? '') ?>" required>
     <span style="color: red;"><?= $idSorteoError ?></span>
     <br><br>
 
     <label for="importe">Importe:</label>
-    <input type="number" id="importe" name="importe" step="0.01" value="<?= htmlspecialchars($_POST['importe'] ?? '') ?>" required>
+    <input type="number" id="importe" name="importe" step="0.01" value="<?= ($_POST['importe'] ?? '') ?>" required>
     <br><br>
 
     <button type="submit">Crear Participación</button>

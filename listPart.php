@@ -24,7 +24,8 @@ try {
     $conta = 0;
 
     // Mostramos las filas de la tabla
-    echo "<table><tr>
+    echo "<table>";
+    echo "<tr>
         <th>ID PARTICIPACIÓN</th>
         <th>ID USUARIO</th>
         <th>ID SORTEO</th>
@@ -78,8 +79,9 @@ try {
     echo "<p>Error: " . $e->getMessage() . "</p>";
 }
 
+echo "</table>";
 ?>
-</table>
+
 <p><a href='nuevaPart.php'>Nueva participación</a></p>
 
 <p><a href="inicio.php"><button>Volver a Inicio</button></a></p>
