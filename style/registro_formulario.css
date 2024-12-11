@@ -69,7 +69,9 @@ select{
 }
 
 .centrado {
-    text-align: center;
+    /* text-align: center; */
+    display: flex;
+    justify-content: center;
 }
 
 #formout_container {
@@ -109,7 +111,7 @@ select{
 @media(max-width:600px){
     #datos_form {
         justify-content: none;
-}
+    }
 }
 
 #img_perfil {
@@ -118,11 +120,11 @@ select{
     padding: 5px;
 }
 
-#btn_submit {
+.btn_submit {
     background-color: cadetblue;
 }
 
-#btn_cancelar {
+.btn_cancelar {
     background-color: red;
 }
 
@@ -143,11 +145,6 @@ select{
     max-width: 350px;
 }
 
-#botones_container, #inicio_sesion {
-    display: flex;
-    justify-content: center;
-}
-
 #pie {
     margin-top: 1rem;
     background-color: beige;
@@ -156,7 +153,7 @@ select{
 }
 
 /* #cab {
-    background-color: beige;
-    color: blue;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+background-color: beige;
+color: blue;
+font-family: Georgia, 'Times New Roman', Times, serif;
 } */

@@ -13,12 +13,29 @@ function conectar()
     return $pdo;
 }
 
-/** Función existeUsu: comprueba que el usuario pasado por parámetro existe en la base de datos. */
-function existeUsu($nomUsu, $id_usuario = null): bool
+/** Función existeUsu: comprueba que el usuario pasado por parámetro existe en la base de datos. 
+ * @param string $nomUsu -> nombre de usuario a buscar en la base de datos.
+ * @param int $id_usuario -> posible id de usuario. Valor predeterminado null.
+ * @return bool true si hay algún usuario registrado con ese nombre de usuario; false si no.
+ */
+// function existeUsu($nomUsu, $id_usuario = null): bool
+// {
+//     $pdo = conectar();
+//     $sql = "SELECT * FROM usuarios WHERE nomusu = ? AND (idusuario != ? OR ? IS NULL)";
+//     $sentencia = $pdo->prepare($sql);
+//     $sentencia->execute([$nomUsu, $id_usuario, $id_usuario]);
+//     return $sentencia->rowCount() > 0;
+// }
+
+/** Función existeUsu: comprueba que el usuario pasado por parámetro existe en la base de datos. 
+ * @param string $nomUsu -> nombre de usuario a buscar en la base de datos.
+ * @param PDO $pdo -> conexión a base de datos.
+ * @param int $id_usuario -> posible id de usuario. Valor predeterminado null.
+ * @return bool true si hay algún usuario registrado con ese nombre de usuario; false si no.
+ */
+function existeUsu($nomUsu, $pdo, $id_usuario = null): bool
 {
-    $pdo = conectar();
     $sql = "SELECT * FROM usuarios WHERE nomusu = ? AND (idusuario != ? OR ? IS NULL)";
-    $sentencia = $pdo->prepare($sql);
     $sentencia = $pdo->prepare($sql);
     $sentencia->execute([$nomUsu, $id_usuario, $id_usuario]);
     return $sentencia->rowCount() > 0;

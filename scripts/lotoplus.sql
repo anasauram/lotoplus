@@ -92,7 +92,7 @@ FOREIGN KEY (idsorteo) References sorteos(idsorteo)
 ) engine=innodb;
 
 /*Premios acumulados */
-select sum(par.importe*pre.premio)
-from premios pre, participaciones par 
-where (pre.idsorteo =  par.idsorteo) and (pre.numero = par.numero) and (par.idprop = $idusuario);
+-- select sum(par.importe*pre.premio)
+-- from premios pre, participaciones par 
+-- where (pre.idsorteo =  par.idsorteo) and (pre.numero = par.numero) and (par.idprop = $idusuario);
 

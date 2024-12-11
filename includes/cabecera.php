@@ -14,4 +14,8 @@
 	<?php
 	require("config.php");
 	require("funciones.php");
+
+	ini_set('display_errors', 1);       // Habilita la visualización de errores
+	ini_set('display_startup_errors', 1); // Muestra errores en el inicio de PHP
+	error_reporting(E_ALL);             // Reporta todos los errores, advertencias y avisos
 	?>
