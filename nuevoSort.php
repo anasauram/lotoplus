@@ -59,10 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p style="color: green;"><?= htmlspecialchars($success) ?></p>
     <?php endif; ?>
 
-    <button type="submit">Guardar</button>
+    <button type="submit" class="btn_submit">Guardar</button>
 </form>
 
-<p><a href="listSort.php"><button>Volver a lista de sorteos</button></a></p>
+<p><a href="listSort.php"><button class="btn_cancelar">Volver a lista de sorteos</button></a></p>
 
 <?php
 require("includes/pie.php");

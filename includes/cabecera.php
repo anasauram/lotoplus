@@ -20,11 +20,12 @@
 				</a>
 				<nav>
 					<ul class="menu">
+						<!-- Menú a la izquierda -->
 						<li class="submenu">
 							<a>Usuarios</a>
 							<ul class="submenu-items">
 								<li><a href="listUsu.php">Listado</a></li>
-								<li><a href="altaEditUsu.php">Alta</a></li>
+								<li><a href="altaEditUsu.php?modo=alta">Alta</a></li>
 							</ul>
 						</li>
 						<li class="submenu">
@@ -44,6 +45,14 @@
 							<ul class="submenu-items">
 								<li><a href="listPrem.php">Listado</a></li>
 								<li><a href="calcPrem.php">Cálculo</a></li>
+							</ul>
+						</li>
+
+						<!-- Menú de Perfil a la derecha -->
+						<li class="submenu perfil">
+							<a>Perfil</a>
+							<ul class="submenu-items">
+								<li><a href="cerrarSesion.php">Cerrar sesión</a></li>
 							</ul>
 						</li>
 					</ul>

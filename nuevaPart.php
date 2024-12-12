@@ -78,9 +78,9 @@ try {
     <input type="number" id="importe" name="importe" step="0.01" value="<?= ($_POST['importe'] ?? '') ?>" required>
     <br><br>
 
-    <button type="submit">Crear Participación</button>
+    <button type="submit" class="btn_submit">Crear Participación</button>
 </form>
 
-<p><a href="listPart.php">Cancelar</a></p>
+<p><a href="listPart.php">Volver a listado de participaciones</a></p>
 
 <?php require("includes/pie.php"); ?>
