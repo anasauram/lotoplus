@@ -1,0 +1,66 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+nav {
+    background-color: #044685;
+    /* Fondo azul claro */
+}
+
+ul.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+ul.menu li {
+    position: relative;
+}
+
+ul.menu li a {
+    display: block;
+    padding: 20px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+}
+
+ul.menu li a:hover {
+    background-color: #87CEEB;
+    /* Azul más oscuro al pasar el ratón */
+}
+
+/* Estilo para el submenú */
+ul.submenu-items {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #4682B4;
+    /* Azul más oscuro */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    min-width: 160px;
+}
+
+ul.submenu-items li a {
+    padding: 12px;
+    color: white;
+}
+
+ul.submenu-items li a:hover {
+    background-color: #5A9BD4;
+    /* Color de hover más claro */
+}
+
+/* Mostrar el submenú al pasar el ratón sobre el elemento principal */
+.submenu:hover .submenu-items {
+    display: block;
+}

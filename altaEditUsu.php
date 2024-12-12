@@ -229,14 +229,14 @@ if (isset($_GET['id'])) {
                     <label for="marketing" id="lbl_marketing">Me gustaría recibir novedades de marketing de LotoPlus por correo electrónico.</label>
                 </div>
             </div>
-            <div id="botones_container">
-                <button type="submit" id="btn_submit" name="submit"><?= ($_GET['modo'] == 'alta') ? 'CREAR ' : 'MODIFICAR ' ?>USUARIO</button>
-                <button type="reset" id="btn_cancelar">CANCELAR</button>
+            <div class="centrado">
+                <button type="submit" class="btn_submit" name="submit"><?= ($_GET['modo'] == 'alta') ? 'CREAR ' : 'MODIFICAR ' ?>USUARIO</button>
+                <button type="reset" class="btn_cancelar">CANCELAR</button>
             </div>
             <?php
             if ($_GET['modo'] == "alta") {
             ?>
-                <div id="inicio_sesion">
+                <div class="centrado">
                     <a class="p_peque" href="#">Inicio de sesión</a>
                 </div>
             <?php

@@ -33,8 +33,9 @@ function conectar()
  * @param int $id_usuario -> posible id de usuario. Valor predeterminado null.
  * @return bool true si hay algún usuario registrado con ese nombre de usuario; false si no.
  */
-function existeUsu($nomUsu, $pdo, $id_usuario = null): bool
+function existeUsu($nomUsu, $id_usuario = null): bool
 {
+    $pdo = conectar();
     $sql = "SELECT * FROM usuarios WHERE nomusu = ? AND (idusuario != ? OR ? IS NULL)";
     $sentencia = $pdo->prepare($sql);
     $sentencia->execute([$nomUsu, $id_usuario, $id_usuario]);
