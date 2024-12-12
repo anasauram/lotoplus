@@ -73,7 +73,6 @@ try {
 
         echo "</td></tr>";
     }
-
 } catch (Exception $e) {
     // Capturamos el error y mostramos un mensaje
     echo "<p>Error: " . $e->getMessage() . "</p>";
@@ -84,7 +83,6 @@ echo "</table>";
 
 <p><a href='nuevaPart.php'>Nueva participación</a></p>
 
-<p><a href="inicio.php"><button>Volver a Inicio</button></a></p>
 
 <?php
 require("includes/pie.php");

@@ -32,7 +32,7 @@ ul.menu li a {
 }
 
 ul.menu li a:hover {
-    background-color: #87CEEB;
+    background-color: #2196f3;
     /* Azul más oscuro al pasar el ratón */
 }
 
@@ -42,7 +42,7 @@ ul.submenu-items {
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #4682B4;
+    background-color: #1465bb;
     /* Azul más oscuro */
     list-style-type: none;
     padding: 0;
@@ -56,11 +56,15 @@ ul.submenu-items li a {
 }
 
 ul.submenu-items li a:hover {
-    background-color: #5A9BD4;
+    background-color: #2196f3;
     /* Color de hover más claro */
 }
 
 /* Mostrar el submenú al pasar el ratón sobre el elemento principal */
 .submenu:hover .submenu-items {
     display: block;
+}
+
+.horizontal{
+    display: flex;
 }
