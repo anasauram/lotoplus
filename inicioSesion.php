@@ -1,26 +1,36 @@
 <?php
+$ocultarNav = true;
 require("includes/cabecera.php");
+
+session_start();
+
 //si el formulario se ha enviado insertamos el registro.
-if (isset($_POST['inicio'])) {
+if (isset($_POST['usuario']) && isset($_POST['clave'])) {
         // **************** Logueo usuario ****************
-        //nos conectamos a mysql
-        $cnx = conectar();
+        // si el usuario acaba de intentar conectarse
+        $usuario = $_POST['usuario'];
+        $clave = $_POST['clave'];
 
-        $campos = "nombre,apellido,nick,email,url";
-        $valores = "'" . $_POST['nombre'] . "',";
-        $valores .= "'" . $_POST['apellido'] . "',";
-        $valores .= "'" . $_POST['nick'] . "',";
-        $valores .= "'" . $_POST['email'] . "',";
-        $valores .= "'" . $_POST['url'] . "'";
-        $sql = "INSERT INTO contactos ($campos) VALUES($valores)";
-        $res = mysqli_query($cnx, $sql) or die(mysqli_error($cnx));
-        echo "Registro insertado.<br><a href='listado.php'>regresar</a>";
-        mysqli_close($cnx);
-        exit;
+        // Nos conectamos a MySQL
+        $pdo = conectar();
 
+        $sql = "SELECT * FROM usuarios WHERE nomusu = '$usuario'";
+        $res = $pdo->query($sql);
 
-        header("Location: index.php");
-        exit;
+        if ($fila = $res->fetch()) {
+                // Comprobamos la contraseña			
+                if (password_verify($clave, $fila['clave'])) {
+                        // **************** Variables de sesión ****************
+                        // Si está en la base de datos y coincide, registramos al usuario
+                        $_SESSION['idusuario_valido'] = $fila['idusuario']; // Guardamos la clave primaria del registro
+                        $_SESSION['usuario_valido'] = $fila['nomusu'];     // Guardamos el nombre de usuario		
+
+                        header("Location: inicio.php");
+                        exit;
+                }
+        } else {
+                echo '<script>alert("Credenciales no válidas");</script>';
+        }
 }
 ?>
 
@@ -28,11 +38,11 @@ if (isset($_POST['inicio'])) {
         <table>
                 <tr>
                         <th>NOMBRE DE USUARIO</th>
-                        <td><input name="nombre" type="text" id="nombre" class="inputtxt_minsize" value=""></td>
+                        <td><input name="usuario" type="text" id="nombre" class="inputtxt_minsize" value=""></td>
                 </tr>
                 <tr>
-                        <th>CONTRASEÑA</th>
-                        <td><input name="contra" type="password" id="contra" value=""></td>
+                        <th>CONTRASE&Ntilde;A</th>
+                        <td><input name="clave" type="password" id="contra" value=""></td>
                 </tr>
 
 

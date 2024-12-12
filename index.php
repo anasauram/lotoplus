@@ -1,4 +1,5 @@
 <?php
+$ocultarNav = true;
 require("includes/cabecera.php");
 
 // Inicialización en caso de que no se haya registrado un error por exceso de tamaño de imagen subida.

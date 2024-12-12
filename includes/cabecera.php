@@ -13,41 +13,43 @@
 
 <body>
 	<header>
-		<div class="horizontal">
-			<a href="inicio.php">
-				<img src="img/logoSL.png" alt="Logo de LotoPlus" id="logo_lotoplus">
-			</a>
-			<nav>
-				<ul class="menu">
-					<li class="submenu">
-						<a>Usuarios</a>
-						<ul class="submenu-items">
-							<li><a href="listUsu.php">Listado</a></li>
-							<li><a href="altaEditUsu.php">Alta</a></li>
-						</ul>
-					</li>
-					<li class="submenu">
-						<a>Sorteos</a>
-						<ul class="submenu-items">
-							<li><a href="listSort.php">Listado</a></li>
-						</ul>
-					</li>
-					<li class="submenu">
-						<a>Participaciones</a>
-						<ul class="submenu-items">
-							<li><a href="listPart.php">Listado</a></li>
-						</ul>
-					</li>
-					<li class="submenu">
-						<a>Premios</a>
-						<ul class="submenu-items">
-							<li><a href="listPrem.php">Listado</a></li>
-							<li><a href="calcPrem.php">Cálculo</a></li>
-						</ul>
-					</li>
-				</ul>
-			</nav>
-		</div>
+		<?php if (!isset($ocultarNav) || !$ocultarNav): ?>
+			<div class="horizontal">
+				<a href="inicio.php">
+					<img src="img/logoSL.png" alt="Logo de LotoPlus" id="logo_lotoplus">
+				</a>
+				<nav>
+					<ul class="menu">
+						<li class="submenu">
+							<a>Usuarios</a>
+							<ul class="submenu-items">
+								<li><a href="listUsu.php">Listado</a></li>
+								<li><a href="altaEditUsu.php">Alta</a></li>
+							</ul>
+						</li>
+						<li class="submenu">
+							<a>Sorteos</a>
+							<ul class="submenu-items">
+								<li><a href="listSort.php">Listado</a></li>
+							</ul>
+						</li>
+						<li class="submenu">
+							<a>Participaciones</a>
+							<ul class="submenu-items">
+								<li><a href="listPart.php">Listado</a></li>
+							</ul>
+						</li>
+						<li class="submenu">
+							<a>Premios</a>
+							<ul class="submenu-items">
+								<li><a href="listPrem.php">Listado</a></li>
+								<li><a href="calcPrem.php">Cálculo</a></li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		<?php endif; ?>
 	</header>
 	<?php
 	require("config.php");
