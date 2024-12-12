@@ -5,13 +5,18 @@ function conectar()
 {
     global $HOSTNAME, $USERNAME, $PASSWORD, $DATABASE;
     try {
+        // Crear la conexión PDO
         $pdo = new PDO("mysql:host=$HOSTNAME;dbname=$DATABASE;charset=UTF8", $USERNAME, $PASSWORD);
+        // Configurar el modo de error para excepciones
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $pdo;  // Si la conexión es exitosa, devuelve el objeto PDO
     } catch (PDOException $e) {
+        // Si hay un error, muestra el mensaje y retorna null
         echo "Error de conexión con la base de datos: " . $e->getMessage();
+        return null;  // Devolver null si la conexión falla
     }
-    return $pdo;
 }
+
 
 /** Función existeUsu: comprueba que el usuario pasado por parámetro existe en la base de datos. 
  * @param string $nomUsu -> nombre de usuario a buscar en la base de datos.
@@ -33,6 +38,7 @@ function conectar()
  * @param int $id_usuario -> posible id de usuario. Valor predeterminado null.
  * @return bool true si hay algún usuario registrado con ese nombre de usuario; false si no.
  */
+function existeUsu($nomUsu, $id_usuario = null): bool
 function existeUsu($nomUsu, $id_usuario = null): bool
 {
     $pdo = conectar();

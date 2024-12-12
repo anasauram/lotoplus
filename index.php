@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
 
     $pdo = conectar();
     // Validación de nombre de usuario.
-    if (existeUsu($nombre_usuario, $pdo)) {
+    if (existeUsu($nombre_usuario)) {
         $errores .= "\nError: El usuario ya existe.";
     }
     // Validación de edad.
