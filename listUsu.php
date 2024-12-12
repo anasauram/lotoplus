@@ -52,10 +52,10 @@ $numIni = ($numPag - 1) * $REGISTROS_PAG;
     $fila = $res->fetch();
     $totalFilas = $fila['contaFilas'];  // 34
     $totalPag = ceil($totalFilas / $REGISTROS_PAG);   // 34/20 = 2
-    echo "<tr><td class='centrado' colspan='6'>Mostrados $conta usuarios - Total $totalFilas usuarios</td></tr>";
+    echo "<tr><td colspan='6'>Mostrados $conta usuarios - Total $totalFilas usuarios</td></tr>";
     // Si hay más páginas, mostramos los enlaces
     if ($totalPag > 1) {
-        echo "<tr><td  class='centrado' colspan='6'>";
+        echo "<tr><td  colspan='6'>";
         if ($numPag > 1) {
             //Página anterior
             echo "<a href='" . $_SERVER['PHP_SELF'] . "?numPagina=" . ($numPag - 1) . "'>Anterior</a> ";

@@ -58,10 +58,10 @@ try {
     $totalPag = ceil($totalFilas / $REGISTROS_PAG);
 
     // Mostramos total de sorteos y su paginación
-    echo "<tr><td colspan='5' class='centrado'>$conta sorteos - Filas $totalFilas</td></tr>";
+    echo "<tr><td colspan='5'>$conta sorteos - Filas $totalFilas</td></tr>";
 
     if ($totalPag > 1) {
-        echo "<tr><td colspan='5' class='centrado'>";
+        echo "<tr><td colspan='5'>";
 
         if ($numPag > 1) {
             echo "<a href='" . $_SERVER['PHP_SELF'] . "?numPagina=" . ($numPag - 1) . "'>Anterior</a> ";

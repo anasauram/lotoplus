@@ -31,7 +31,7 @@ try {
         <th>ID SORTEO</th>
         <th>NÚMERO</th>
         <th>IMPORTE</th>
-        <th>ACCIÓN</th>
+        <th colspan='2'>ACCIÓN</th>
     </tr>";
 
     while ($fila = $res->fetch()) {
@@ -59,10 +59,10 @@ try {
     $totalPag = ceil($totalFilas / $REGISTROS_PAG);
 
     // Mostramos total de participaciones y su paginación
-    echo "<tr><td colspan='8' class='centrado'>$conta participaciones - Filas $totalFilas</td></tr>";
+    echo "<tr><td colspan='8'>$conta participaciones - Filas $totalFilas</td></tr>";
 
     if ($totalPag > 1) {
-        echo "<tr><td colspan='8' class='centrado'>";
+        echo "<tr><td colspan='8'>";
 
         if ($numPag > 1) {
             echo "<a href='" . $_SERVER['PHP_SELF'] . "?numPagina=" . ($numPag - 1) . "'>Anterior</a> ";
